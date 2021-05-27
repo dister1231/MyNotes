@@ -106,7 +106,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             });
         }
     }
-    public interface DeleteOnClick {
+    interface DeleteOnClick {
         void deleteRecord(int id);
     }
 }
