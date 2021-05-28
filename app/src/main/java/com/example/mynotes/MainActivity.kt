@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.ArrayList
 
-class MainActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutId), Adapter.DeleteOnClick {
+class MainActivity: AppCompatActivity(), Adapter.DeleteOnClick {
 
     private val dbExpert = DBExpert(this)
     private val notes = ArrayList<Note>()
