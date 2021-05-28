@@ -1,7 +1,9 @@
 package com.example.mynotes
 
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,13 +11,14 @@ import java.util.ArrayList
 
 class MainActivity: AppCompatActivity(), Adapter.DeleteOnClick {
 
+    private var notes = ArrayList<Note>()
     private val dbExpert = DBExpert(this)
-    private val notes = ArrayList<Note>()
-    private var adapter = Adapter(this, notes, this)
+    private val adapter = Adapter(this, notes, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val listOfNotes: RecyclerView = findViewById(R.id.recycler)
         listOfNotes.layoutManager = LinearLayoutManager(this)
@@ -32,14 +35,20 @@ class MainActivity: AppCompatActivity(), Adapter.DeleteOnClick {
 
         notes.sort()
 
-        adapter = Adapter(this, notes, this)
+        listOfNotes.adapter = adapter
+    }
+
+    fun addNewNote(view: View) {
+        startActivity(Intent(this, EditNoteActivity::class.java))
     }
 
     override fun deleteRecord(position: Int) {
+
         dbExpert.deleteRecord(notes[position].id)
         notes.remove(notes[position])
         adapter.notifyItemRemoved(position)
     }
+
 }
 
 //Java version
